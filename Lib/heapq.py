@@ -311,6 +311,11 @@ def _siftup_max(heap, pos):
     heap[pos] = newitem
     _siftdown_max(heap, startpos, pos)
 
+	#将merge方法写在heapq这个module里面，因为这里在合并若干数组时，将每个数组拿出一个来，然后用堆选出最小值，然后更新堆内元素。复杂度为O(K+N*logK)
+	#这种归并排序，可用：
+		#败者树：最优，每次直接和父节点比较
+		#锦标赛树：每次也仅需比较一次，但需要通过父节点才能找到与之比较的兄弟节点
+		#堆来实现：本例，需要做一次percolateDown，每一层需要比较两次
 def merge(*iterables, key=None, reverse=False):
     '''Merge multiple sorted inputs into a single sorted output.
 
