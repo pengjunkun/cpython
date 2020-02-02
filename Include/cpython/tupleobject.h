@@ -11,7 +11,9 @@ typedef struct {
     /* ob_item contains space for 'ob_size' elements.
        Items must normally not be NULL, except during construction when
        the tuple is not yet visible outside the function that builds it. */
-    PyObject *ob_item[1];
+    //ob_item仅能存储一个指针,但在后续allocate会有size的度量
+	PyObject *ob_item[1];
+	//Tuple类型，和list一样仍然保存的是指针，但是限制了set，使之可以利用初始固定下来的量，做hash
 } PyTupleObject;
 
 PyAPI_FUNC(int) _PyTuple_Resize(PyObject **, Py_ssize_t);
