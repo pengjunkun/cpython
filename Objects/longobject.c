@@ -55,6 +55,7 @@ get_small_int(sdigit ival)
     return v;
 }
 
+//for now, in python3, there is only one tpye for integers
 static PyLongObject *
 maybe_small_long(PyLongObject *v)
 {
@@ -3032,6 +3033,19 @@ long_richcompare(PyObject *self, PyObject *other, int op)
     Py_RETURN_RICHCOMPARE(result, 0, op);
 }
 
+//integer的hash，根据其具体数据值，因此，对两个具有相同数值的变量做hash后，结果相同
+/*
+>>> a=4
+>>> b=4
+>>> hash(a)
+4
+>>> hash(b)
+4
+>>> hash(10000000000333333333333333333333333)
+63584395948443655
+>>>
+
+*/
 static Py_hash_t
 long_hash(PyLongObject *v)
 {
